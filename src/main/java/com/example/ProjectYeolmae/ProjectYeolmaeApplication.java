@@ -10,4 +10,6 @@ public class ProjectYeolmaeApplication {
 		SpringApplication.run(ProjectYeolmaeApplication.class, args);
 	}
 
+
+
 }
