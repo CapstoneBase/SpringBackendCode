@@ -1,6 +1,7 @@
 package com.capstone.yeolmaeTeamProject.domain.application;
 
 import com.capstone.yeolmaeTeamProject.domain.dao.UserRepository;
+import com.capstone.yeolmaeTeamProject.domain.dto.request.UserIdRequestDto;
 import com.capstone.yeolmaeTeamProject.domain.dto.request.UserRequestDto;
 import com.capstone.yeolmaeTeamProject.domain.exception.AlreadyExistAccountException;
 import com.capstone.yeolmaeTeamProject.domain.user.domain.User;
@@ -22,6 +23,11 @@ public class UserService {
         validationService.checkValid(user);
         return userRepository.save(user).getId();
     }
+
+    public Boolean checkId(UserIdRequestDto requestDto) {
+        return userRepository.existsById(requestDto.getId());
+    }
+
 
     private void checkUserUniqueness(UserRequestDto requestDto) {
         if (userRepository.existsById(requestDto.getId())) {

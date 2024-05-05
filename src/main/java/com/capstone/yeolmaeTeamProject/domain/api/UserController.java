@@ -1,6 +1,7 @@
 package com.capstone.yeolmaeTeamProject.domain.api;
 
 import com.capstone.yeolmaeTeamProject.domain.application.UserService;
+import com.capstone.yeolmaeTeamProject.domain.dto.request.UserIdRequestDto;
 import com.capstone.yeolmaeTeamProject.domain.dto.request.UserRequestDto;
 import com.capstone.yeolmaeTeamProject.global.common.dto.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,5 +28,14 @@ public class UserController {
     ) {
         String id = userService.createUser(requestDto);
         return ApiResponse.success(id);
+    }
+
+    @Operation(summary = "아이디 중복 확인", description = "이미 존재하는 아이디일 경우 true 반환")
+    @PostMapping("/check")
+    public ApiResponse<Boolean> checkId(
+            @Valid @RequestBody UserIdRequestDto requestDto
+    ) {
+        Boolean result = userService.checkId(requestDto);
+        return ApiResponse.success(result);
     }
 }
