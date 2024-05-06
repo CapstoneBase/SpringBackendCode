@@ -10,7 +10,7 @@ import lombok.Setter;
 public class LoginRequestDto {
 
     @NotNull(message = "아이디를 입력해주세요.")
-    @Schema(description = "학번", example = "yeolmae", required = true)
+    @Schema(description = "아이디", example = "yeolmae", required = true)
     private String id;
 
     @NotNull(message = "비밀번호를 입력해주세요.")
