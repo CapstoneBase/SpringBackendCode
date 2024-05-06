@@ -1,6 +1,10 @@
 package com.capstone.yeolmaeTeamProject.domain.login.application;
 
 import com.capstone.yeolmaeTeamProject.domain.login.dto.request.LoginRequestDto;
+import com.capstone.yeolmaeTeamProject.domain.login.dto.response.TokenInfo;
+import com.capstone.yeolmaeTeamProject.domain.user.dao.UserRepository;
+import com.capstone.yeolmaeTeamProject.domain.user.domain.User;
+import com.capstone.yeolmaeTeamProject.global.auth.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -8,13 +12,19 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class LoginService {
 
     private final AuthenticationManager authenticationManager;
 
-    public String login(LoginRequestDto requestDto) {
+    private final UserRepository userRepository;
+
+    private final JwtTokenProvider jwtTokenProvider;
+
+    public TokenInfo login(LoginRequestDto requestDto) {
         // UsernamePasswordAuthenticationToken: Authentication을 구현한 클래스, 사용자의 ID와 Password를 저장
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(requestDto.getId(), requestDto.getPassword());
 
@@ -24,7 +34,15 @@ public class LoginService {
 
         // SecurityContextHolder: SecurityContext를 제공하는 클래스, SecurityContext에 인증 정보를 저장
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return requestDto.getId();
+
+        Optional<User> userOpt = userRepository.findById(requestDto.getId());
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            return jwtTokenProvider.generateToken(user.getId(), user.getRole());
+        }
+
+        return null;
+
     }
 
 }

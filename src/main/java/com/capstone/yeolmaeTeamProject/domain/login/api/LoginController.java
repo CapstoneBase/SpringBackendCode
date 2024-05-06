@@ -2,6 +2,7 @@ package com.capstone.yeolmaeTeamProject.domain.login.api;
 
 import com.capstone.yeolmaeTeamProject.domain.login.application.LoginService;
 import com.capstone.yeolmaeTeamProject.domain.login.dto.request.LoginRequestDto;
+import com.capstone.yeolmaeTeamProject.domain.login.dto.response.TokenInfo;
 import com.capstone.yeolmaeTeamProject.global.common.dto.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,10 +23,10 @@ public class LoginController {
 
     @Operation(summary = "로그인")
     @PostMapping("")
-    public ApiResponse<String> login(
+    public ApiResponse<TokenInfo> login(
             @Valid @RequestBody LoginRequestDto requestDto
     ) {
-        String id = loginService.login(requestDto);
+        TokenInfo id = loginService.login(requestDto);
         return ApiResponse.success(id);
     }
 
