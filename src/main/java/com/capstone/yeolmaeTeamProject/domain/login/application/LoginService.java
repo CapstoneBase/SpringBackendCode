@@ -32,9 +32,6 @@ public class LoginService {
         // global쪽에서의 CustomUserDetailsService -> loadUserByUsername 메소드를 호출하여 사용자 정보를 가져옴
         Authentication authentication = authenticationManager.authenticate(token);
 
-        // SecurityContextHolder: SecurityContext를 제공하는 클래스, SecurityContext에 인증 정보를 저장
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
         Optional<User> userOpt = userRepository.findById(requestDto.getId());
         if (userOpt.isPresent()) {
             User user = userOpt.get();
