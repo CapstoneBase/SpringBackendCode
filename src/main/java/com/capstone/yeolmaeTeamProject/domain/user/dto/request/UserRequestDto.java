@@ -1,4 +1,4 @@
-package com.capstone.yeolmaeTeamProject.domain.dto.request;
+package com.capstone.yeolmaeTeamProject.domain.user.dto.request;
 
 import com.capstone.yeolmaeTeamProject.domain.user.domain.Role;
 import com.capstone.yeolmaeTeamProject.domain.user.domain.User;

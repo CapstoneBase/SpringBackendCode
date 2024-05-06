@@ -1,9 +1,9 @@
-package com.capstone.yeolmaeTeamProject.domain.application;
+package com.capstone.yeolmaeTeamProject.domain.user.application;
 
-import com.capstone.yeolmaeTeamProject.domain.dao.UserRepository;
-import com.capstone.yeolmaeTeamProject.domain.dto.request.UserIdRequestDto;
-import com.capstone.yeolmaeTeamProject.domain.dto.request.UserRequestDto;
-import com.capstone.yeolmaeTeamProject.domain.exception.AlreadyExistAccountException;
+import com.capstone.yeolmaeTeamProject.domain.user.dao.UserRepository;
+import com.capstone.yeolmaeTeamProject.domain.user.dto.request.UserIdRequestDto;
+import com.capstone.yeolmaeTeamProject.domain.user.dto.request.UserRequestDto;
+import com.capstone.yeolmaeTeamProject.domain.user.exception.AlreadyExistAccountException;
 import com.capstone.yeolmaeTeamProject.domain.user.domain.User;
 import com.capstone.yeolmaeTeamProject.global.validation.ValidationService;
 import lombok.RequiredArgsConstructor;

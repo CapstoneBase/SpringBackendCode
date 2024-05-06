@@ -1,8 +1,8 @@
-package com.capstone.yeolmaeTeamProject.domain.api;
+package com.capstone.yeolmaeTeamProject.domain.user.api;
 
-import com.capstone.yeolmaeTeamProject.domain.application.UserService;
-import com.capstone.yeolmaeTeamProject.domain.dto.request.UserIdRequestDto;
-import com.capstone.yeolmaeTeamProject.domain.dto.request.UserRequestDto;
+import com.capstone.yeolmaeTeamProject.domain.user.application.UserService;
+import com.capstone.yeolmaeTeamProject.domain.user.dto.request.UserIdRequestDto;
+import com.capstone.yeolmaeTeamProject.domain.user.dto.request.UserRequestDto;
 import com.capstone.yeolmaeTeamProject.global.common.dto.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,4 +1,4 @@
-package com.capstone.yeolmaeTeamProject.domain.exception;
+package com.capstone.yeolmaeTeamProject.domain.user.exception;
 
 public class AlreadyExistAccountException extends RuntimeException {
 

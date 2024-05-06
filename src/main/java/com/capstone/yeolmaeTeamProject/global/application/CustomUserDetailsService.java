@@ -1,6 +1,6 @@
 package com.capstone.yeolmaeTeamProject.global.application;
 
-import com.capstone.yeolmaeTeamProject.domain.dao.UserRepository;
+import com.capstone.yeolmaeTeamProject.domain.user.dao.UserRepository;
 import com.capstone.yeolmaeTeamProject.domain.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
