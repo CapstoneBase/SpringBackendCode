@@ -23,15 +23,12 @@ public class UserRequestDto {
     @Schema(description = "이름", example = "홍길동")
     private String name;
 
-    @NotNull(message = "이메일을 입력해주세요.")
     @Schema(description = "이메일", example = "abc@abc.com")
     private String email;
 
-    @NotNull(message = "학교를 입력해주세요.")
     @Schema(description = "학교", example = "한국대학교")
     private String school;
 
-    @NotNull(message = "전공을 입력해주세요.")
     @Schema(description = "전공", example = "컴퓨터공학")
     private String major;
 

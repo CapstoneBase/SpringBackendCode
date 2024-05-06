@@ -32,16 +32,13 @@ public class User extends BaseEntity implements UserDetails {
     @Size(min = 1, max = 10, message = "이름은 1자 이상 10자 이하로 입력해 주세요.")
     private String name;
 
-    @Column(nullable = false)
     @Email(message = "이메일 형식에 맞게 입력해 주세요.")
     @Size(min = 1, max = 50, message = "이메일은 1자 이상 50자 이하로 입력해 주세요.")
     private String email;
 
-    @Column(nullable = false)
     @Size(min = 1, max = 10, message = "학교는 1자 이상 10자 이하로 입력해 주세요.")
     private String school;
 
-    @Column(nullable = false)
     @Size(min = 1, max = 10, message = "전공은 1자 이상 10자 이하로 입력해 주세요.")
     private String major;
 

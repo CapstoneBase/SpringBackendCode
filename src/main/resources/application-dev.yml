@@ -34,7 +34,7 @@ spring:
 
   # Configure the MySQL database connection
   datasource:
-    url: jdbc:mysql://localhost:3306/yeolmae?characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/yeolmae
     username: root
     password: 4937
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -67,7 +67,7 @@ resource:
 # Configure Swagger UI and generate OpenAPI documentation
 springdoc:
   version: v1.0.0
-  packages-to-scan: com.capstone.yeolmae.domain
+  packages-to-scan: com.capstone.yeolmaeTeamProject.domain
   swagger-ui:
     tags-sorter: alpha
     operations-sorter: alpha
