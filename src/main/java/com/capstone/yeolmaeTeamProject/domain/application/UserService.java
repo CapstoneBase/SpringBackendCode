@@ -7,6 +7,7 @@ import com.capstone.yeolmaeTeamProject.domain.exception.AlreadyExistAccountExcep
 import com.capstone.yeolmaeTeamProject.domain.user.domain.User;
 import com.capstone.yeolmaeTeamProject.global.validation.ValidationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,9 +18,12 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private final PasswordEncoder passwordEncoder;
+
     public String createUser(UserRequestDto requestDto) {
         checkUserUniqueness(requestDto);
         User user = UserRequestDto.toEntity(requestDto);
+        user.encryptPassword(passwordEncoder);
         validationService.checkValid(user);
         return userRepository.save(user).getId();
     }
