@@ -69,6 +69,16 @@ public class JwtTokenProvider {
         return TokenInfo.create(accessToken, refreshToken);
     }
 
+    public TokenInfo reissue(String token) {
+        if (!isRefreshToken(token)) {
+            throw new TokenValidateException("refresh 토큰이 아닙니다.");
+        }
+        Claims claims = parseClaims(token);
+        String id = claims.getSubject();
+        Role role = Role.valueOf(claims.get("role", String.class));
+        return generateToken(claims.getSubject(), role);
+    }
+
     public boolean isRefreshToken(String token) {
         try {
             Claims claims = parseClaims(token);
