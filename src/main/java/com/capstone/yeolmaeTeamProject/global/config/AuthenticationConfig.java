@@ -1,6 +1,6 @@
 package com.capstone.yeolmaeTeamProject.global.config;
 
-import com.capstone.yeolmaeTeamProject.global.application.CustomUserDetailsService;
+import com.capstone.yeolmaeTeamProject.global.auth.application.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

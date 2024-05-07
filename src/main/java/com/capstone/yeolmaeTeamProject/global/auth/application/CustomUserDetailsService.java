@@ -1,4 +1,4 @@
-package com.capstone.yeolmaeTeamProject.global.application;
+package com.capstone.yeolmaeTeamProject.global.auth.application;
 
 import com.capstone.yeolmaeTeamProject.domain.user.dao.UserRepository;
 import com.capstone.yeolmaeTeamProject.domain.user.domain.User;
