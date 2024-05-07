@@ -46,7 +46,7 @@ public class SecurityConfig {
                 .requestMatchers(OpenApiPatternsProperties.getPatterns()).permitAll()
                 .requestMatchers(SecurityConstants.PERMIT_ALL).permitAll()
                 .requestMatchers(HttpMethod.GET, SecurityConstants.PERMIT_ALL_API_ENDPOINTS_GET).permitAll()
-                .requestMatchers(HttpMethod.POST, SecurityConstants.PERMIT_ALL_API_ENDPOINTS_POST).permitAll()
-                .anyRequest().authenticated();
+                .requestMatchers(HttpMethod.POST, SecurityConstants.PERMIT_ALL_API_ENDPOINTS_POST).permitAll();
+
     }
 }
