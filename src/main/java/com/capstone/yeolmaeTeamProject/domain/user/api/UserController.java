@@ -3,6 +3,7 @@ package com.capstone.yeolmaeTeamProject.domain.user.api;
 import com.capstone.yeolmaeTeamProject.domain.user.application.UserService;
 import com.capstone.yeolmaeTeamProject.domain.user.dto.request.UserIdRequestDto;
 import com.capstone.yeolmaeTeamProject.domain.user.dto.request.UserRequestDto;
+import com.capstone.yeolmaeTeamProject.domain.user.dto.request.UserUpdateRequestDto;
 import com.capstone.yeolmaeTeamProject.global.common.dto.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,12 +14,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
-@Tag(name = "User", description = "유저")
+@Tag(name = "User", description = "회원")
 public class UserController {
 
     private final UserService userService;
 
-    @Operation(summary = "유저 생성")
+    @Operation(summary = "회원 생성")
     @PostMapping("")
     public ApiResponse<String> createUser(
             @Valid @RequestBody UserRequestDto requestDto
@@ -36,7 +37,16 @@ public class UserController {
         return ApiResponse.success(result);
     }
 
-    @Operation(summary = "회원 탈퇴")
+    @Operation(summary = "[U] 회원 정보 수정", description = "ROLE_USER 권한이 필요한 상태")
+    @PatchMapping("")
+    public ApiResponse<String> updateUser(
+            @Valid @RequestBody UserUpdateRequestDto requestDto
+    ) {
+        String id = userService.updateUser(requestDto);
+        return ApiResponse.success(id);
+    }
+
+    @Operation(summary = "회원 탈퇴", description = "ROLE_USER 권한이 필요한 상태")
     @DeleteMapping("")
     public ApiResponse<String> deleteUser() {
         String id = userService.deleteUser();

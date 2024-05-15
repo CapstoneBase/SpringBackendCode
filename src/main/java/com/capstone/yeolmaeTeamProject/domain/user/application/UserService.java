@@ -3,6 +3,7 @@ package com.capstone.yeolmaeTeamProject.domain.user.application;
 import com.capstone.yeolmaeTeamProject.domain.user.dao.UserRepository;
 import com.capstone.yeolmaeTeamProject.domain.user.dto.request.UserIdRequestDto;
 import com.capstone.yeolmaeTeamProject.domain.user.dto.request.UserRequestDto;
+import com.capstone.yeolmaeTeamProject.domain.user.dto.request.UserUpdateRequestDto;
 import com.capstone.yeolmaeTeamProject.domain.user.exception.AlreadyExistAccountException;
 import com.capstone.yeolmaeTeamProject.domain.user.domain.User;
 import com.capstone.yeolmaeTeamProject.global.auth.util.AuthUtil;
@@ -30,6 +31,19 @@ public class UserService {
         return userRepository.save(user).getId();
     }
 
+    public String updateUser(UserUpdateRequestDto requestDto) {
+        User user = getCurruentUser();
+        user.update(requestDto, passwordEncoder);
+        validationService.checkValid(user);
+        return userRepository.save(user).getId();
+    }
+
+    public String deleteUser() {
+        User user = getCurruentUser();
+        userRepository.delete(user);
+        return user.getId();
+    }
+
     public Boolean checkId(UserIdRequestDto requestDto) {
         return userRepository.existsById(requestDto.getId());
     }
@@ -39,12 +53,6 @@ public class UserService {
         if (userRepository.existsById(requestDto.getId())) {
             throw new AlreadyExistAccountException("이미 존재하는 아이디입니다.");
         }
-    }
-
-    public String deleteUser() {
-        User user = getCurruentUser();
-        userRepository.delete(user);
-        return user.getId();
     }
 
     private User getCurruentUser() {

@@ -1,5 +1,6 @@
 package com.capstone.yeolmaeTeamProject.domain.user.domain;
 
+import com.capstone.yeolmaeTeamProject.domain.user.dto.request.UserUpdateRequestDto;
 import com.capstone.yeolmaeTeamProject.global.common.domain.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Getter
@@ -59,6 +61,16 @@ public class User extends BaseEntity implements UserDetails {
 
     public static User createUserDetails(User user) {
         return new User(user.getId(), user.getPassword(), user.getRole());
+    }
+
+    public void update(UserUpdateRequestDto requestDto, PasswordEncoder passwordEncoder) {
+        Optional.ofNullable(requestDto.getPassword()).ifPresent(password -> this.password = passwordEncoder.encode(password));
+        Optional.ofNullable(requestDto.getName()).ifPresent(name -> this.name = name);
+
+        //회원가입 부분 입력 파라키터 추가 시 사용할 schema
+//        Optional.ofNullable(requestDto.getEmail()).ifPresent(email -> this.email = email);
+//        Optional.ofNullable(requestDto.getSchool()).ifPresent(school -> this.school = school);
+//        Optional.ofNullable(requestDto.getMajor()).ifPresent(major -> this.major = major);
     }
 
     public void encryptPassword(PasswordEncoder passwordEncoder) {
