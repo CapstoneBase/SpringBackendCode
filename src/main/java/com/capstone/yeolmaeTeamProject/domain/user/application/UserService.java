@@ -5,6 +5,8 @@ import com.capstone.yeolmaeTeamProject.domain.user.dto.request.UserIdRequestDto;
 import com.capstone.yeolmaeTeamProject.domain.user.dto.request.UserRequestDto;
 import com.capstone.yeolmaeTeamProject.domain.user.exception.AlreadyExistAccountException;
 import com.capstone.yeolmaeTeamProject.domain.user.domain.User;
+import com.capstone.yeolmaeTeamProject.global.auth.util.AuthUtil;
+import com.capstone.yeolmaeTeamProject.global.exception.NotFoundException;
 import com.capstone.yeolmaeTeamProject.global.validation.ValidationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,5 +39,17 @@ public class UserService {
         if (userRepository.existsById(requestDto.getId())) {
             throw new AlreadyExistAccountException("이미 존재하는 아이디입니다.");
         }
+    }
+
+    public String deleteUser() {
+        User user = getCurruentUser();
+        userRepository.delete(user);
+        return user.getId();
+    }
+
+    private User getCurruentUser() {
+        String userId = AuthUtil.getAuthenticationInfoUserId();
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("존재하지 않는 사용자입니다."));
     }
 }

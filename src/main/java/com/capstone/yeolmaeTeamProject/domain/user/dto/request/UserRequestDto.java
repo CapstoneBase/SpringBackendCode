@@ -23,12 +23,15 @@ public class UserRequestDto {
     @Schema(description = "이름", example = "홍길동")
     private String name;
 
+    //현재 필수는 아니게 설정
     @Schema(description = "이메일", example = "abc@abc.com")
     private String email;
 
+    //현재 필수는 아니게 설정
     @Schema(description = "학교", example = "한국대학교")
     private String school;
 
+    //현재 필수는 아니게 설정
     @Schema(description = "전공", example = "컴퓨터공학")
     private String major;
 

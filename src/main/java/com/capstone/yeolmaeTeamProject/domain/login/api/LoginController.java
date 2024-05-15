@@ -31,6 +31,7 @@ public class LoginController {
         return ApiResponse.success(id);
     }
 
+    //로그인 부분에서 사용할 수 있게
     @Operation(summary = "[U] 토큰 재발급", description = "ROLE_USER 권한이 필요합니다")
     @PostMapping("/reissue")
     public ApiResponse<TokenInfo> reissue(
