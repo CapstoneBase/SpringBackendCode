@@ -24,25 +24,25 @@ public class UserRequestDto {
     private String name;
 
     //현재 필수는 아니게 설정
-    @Schema(description = "이메일", example = "abc@abc.com")
-    private String email;
+//    @Schema(description = "이메일", example = "abc@abc.com")
+//    private String email;
 
     //현재 필수는 아니게 설정
-    @Schema(description = "학교", example = "한국대학교")
-    private String school;
+//    @Schema(description = "학교", example = "한국대학교")
+//    private String school;
 
     //현재 필수는 아니게 설정
-    @Schema(description = "전공", example = "컴퓨터공학")
-    private String major;
+//    @Schema(description = "전공", example = "컴퓨터공학")
+//    private String major;
 
     public static User toEntity(UserRequestDto requestDto) {
         return User.builder()
                 .id(requestDto.getId())
                 .password(requestDto.getPassword())
                 .name(requestDto.getName())
-                .email(requestDto.getEmail())
-                .school(requestDto.getSchool())
-                .major(requestDto.getMajor())
+//                .email(requestDto.getEmail())
+//                .school(requestDto.getSchool())
+//                .major(requestDto.getMajor())
                 .role(Role.USER)
                 .build();
     }

@@ -67,7 +67,7 @@ public class User extends BaseEntity implements UserDetails {
         Optional.ofNullable(requestDto.getPassword()).ifPresent(password -> this.password = passwordEncoder.encode(password));
         Optional.ofNullable(requestDto.getName()).ifPresent(name -> this.name = name);
 
-        //회원가입 부분 입력 파라키터 추가 시 사용할 schema
+        //회원가입 부분 입력 파라미터 추가 시 사용할 schema
 //        Optional.ofNullable(requestDto.getEmail()).ifPresent(email -> this.email = email);
 //        Optional.ofNullable(requestDto.getSchool()).ifPresent(school -> this.school = school);
 //        Optional.ofNullable(requestDto.getMajor()).ifPresent(major -> this.major = major);
