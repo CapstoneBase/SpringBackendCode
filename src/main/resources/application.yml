@@ -1,9 +1,0 @@
-server:
-  port: 8081
-
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/yeolmae
-    username: root
-    password: 4937
-    driver-class-name: com.mysql.jdbc.Driver
