@@ -56,3 +56,10 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+bootJar {
+	archivesBaseName = "yeolmae"
+	archiveFileName = "yeolmae.jar"
+	archiveVersion = "1.0.0"
+}
+
