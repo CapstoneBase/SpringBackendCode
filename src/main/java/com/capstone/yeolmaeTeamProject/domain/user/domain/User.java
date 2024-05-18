@@ -34,15 +34,15 @@ public class User extends BaseEntity implements UserDetails {
     @Size(min = 1, max = 10, message = "이름은 1자 이상 10자 이하로 입력해 주세요.")
     private String name;
 
-    @Email(message = "이메일 형식에 맞게 입력해 주세요.")
-    @Size(min = 1, max = 50, message = "이메일은 1자 이상 50자 이하로 입력해 주세요.")
-    private String email;
-
-    @Size(min = 1, max = 10, message = "학교는 1자 이상 10자 이하로 입력해 주세요.")
-    private String school;
-
-    @Size(min = 1, max = 10, message = "전공은 1자 이상 10자 이하로 입력해 주세요.")
-    private String major;
+//    @Email(message = "이메일 형식에 맞게 입력해 주세요.")
+//    @Size(min = 1, max = 50, message = "이메일은 1자 이상 50자 이하로 입력해 주세요.")
+//    private String email;
+//
+//    @Size(min = 1, max = 10, message = "학교는 1자 이상 10자 이하로 입력해 주세요.")
+//    private String school;
+//
+//    @Size(min = 1, max = 10, message = "전공은 1자 이상 10자 이하로 입력해 주세요.")
+//    private String major;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -67,7 +67,7 @@ public class User extends BaseEntity implements UserDetails {
         Optional.ofNullable(requestDto.getPassword()).ifPresent(password -> this.password = passwordEncoder.encode(password));
         Optional.ofNullable(requestDto.getName()).ifPresent(name -> this.name = name);
 
-        //회원가입 부분 입력 파라미터 추가 시 사용할 schema
+//        회원가입 부분 입력 파라미터 추가 시 사용할 schema
 //        Optional.ofNullable(requestDto.getEmail()).ifPresent(email -> this.email = email);
 //        Optional.ofNullable(requestDto.getSchool()).ifPresent(school -> this.school = school);
 //        Optional.ofNullable(requestDto.getMajor()).ifPresent(major -> this.major = major);

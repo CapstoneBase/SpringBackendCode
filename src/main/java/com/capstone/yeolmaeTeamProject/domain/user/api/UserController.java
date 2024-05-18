@@ -4,6 +4,7 @@ import com.capstone.yeolmaeTeamProject.domain.user.application.UserService;
 import com.capstone.yeolmaeTeamProject.domain.user.dto.request.UserIdRequestDto;
 import com.capstone.yeolmaeTeamProject.domain.user.dto.request.UserRequestDto;
 import com.capstone.yeolmaeTeamProject.domain.user.dto.request.UserUpdateRequestDto;
+import com.capstone.yeolmaeTeamProject.domain.user.dto.response.UserResponseDto;
 import com.capstone.yeolmaeTeamProject.global.common.dto.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -44,6 +45,13 @@ public class UserController {
     ) {
         String id = userService.updateUser(requestDto);
         return ApiResponse.success(id);
+    }
+
+    @Operation(summary = "[U] 나의 프로필 조회", description = "ROLE_USER 권한이 필요함")
+    @GetMapping("")
+    public ApiResponse<UserResponseDto> getProfile() {
+        UserResponseDto myProfile = userService.getMyProfile();
+        return ApiResponse.success(myProfile);
     }
 
     @Operation(summary = "회원 탈퇴", description = "ROLE_USER 권한이 필요한 상태")

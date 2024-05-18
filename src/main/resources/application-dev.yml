@@ -25,7 +25,7 @@ spring:
 
     # Use Hibernate to automatically create tables based on entity classes
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
       show-sql: true
 
   # Validation

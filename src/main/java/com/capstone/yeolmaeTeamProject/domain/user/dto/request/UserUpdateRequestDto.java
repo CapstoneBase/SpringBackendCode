@@ -14,7 +14,7 @@ public class UserUpdateRequestDto {
     @Schema(description = "이름", example = "홍길동")
     private String name;
 
-    //회원가입 부분 입력 파라키터 추가 시 사용할 schema
+//    회원가입 부분 입력 파라키터 추가 시 사용할 schema
 //    @Schema(description = "이메일", example = "abc@abc.com")
 //    private String email;
 //
