@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -40,6 +41,7 @@ public class UserController {
 
     @Operation(summary = "[U] 회원 정보 수정", description = "ROLE_USER 권한이 필요한 상태")
     @PatchMapping("")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})   //권한 체크 기능 추가
     public ApiResponse<String> updateUser(
             @Valid @RequestBody UserUpdateRequestDto requestDto
     ) {
@@ -49,6 +51,7 @@ public class UserController {
 
     @Operation(summary = "[U] 나의 프로필 조회", description = "ROLE_USER 권한이 필요함")
     @GetMapping("")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})   //권한 체크 기능 추가
     public ApiResponse<UserResponseDto> getProfile() {
         UserResponseDto myProfile = userService.getMyProfile();
         return ApiResponse.success(myProfile);
@@ -56,6 +59,7 @@ public class UserController {
 
     @Operation(summary = "회원 탈퇴", description = "ROLE_USER 권한이 필요한 상태")
     @DeleteMapping("")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})   //권한 체크 기능 추가
     public ApiResponse<String> deleteUser() {
         String id = userService.deleteUser();
         return ApiResponse.success(id);
