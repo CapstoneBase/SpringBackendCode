@@ -60,7 +60,7 @@ public class UserService {
         }
     }
 
-    private User getCurruentUser() {
+    public User getCurruentUser() {
         String userId = AuthUtil.getAuthenticationInfoUserId();
         return userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("존재하지 않는 사용자입니다."));
