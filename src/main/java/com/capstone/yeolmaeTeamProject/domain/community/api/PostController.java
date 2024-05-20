@@ -2,16 +2,14 @@ package com.capstone.yeolmaeTeamProject.domain.community.api;
 
 import com.capstone.yeolmaeTeamProject.domain.community.application.PostService;
 import com.capstone.yeolmaeTeamProject.domain.community.dto.request.PostRequestDto;
+import com.capstone.yeolmaeTeamProject.domain.community.dto.request.PostUpdateRequestDto;
 import com.capstone.yeolmaeTeamProject.global.common.dto.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/posts")
@@ -28,6 +26,17 @@ public class PostController {
             @Valid @RequestBody PostRequestDto requestDto
     ) {
         Long id = postService.createPost(requestDto);
+        return ApiResponse.success(id);
+    }
+
+    @Operation(summary = "[U] 게시글 수정", description = "ROLE_USER 이상의 권한이 필요함")
+    @PatchMapping("/{postId}")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    public ApiResponse<Long> updatePost(
+            @PathVariable("postId") Long postId,
+            @Valid @RequestBody PostUpdateRequestDto requestDto
+    ) {
+        Long id = postService.updatePost(postId, requestDto);
         return ApiResponse.success(id);
     }
 }

@@ -15,6 +15,8 @@ public class PostRequestDto {
     @Schema(description = "카테고리", example = "공지사항")
     private String category;
 
+    //소분류쪽 확정되면 필수 권한 추가
+//    @NotNull(message = "카테고리를 입력해주세요.")
     @Schema(description = "부모 카테고리", example = "공지사항")
     private String parentCategory;
 

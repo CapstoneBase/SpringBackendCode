@@ -1,12 +1,16 @@
 package com.capstone.yeolmaeTeamProject.domain.community.domain;
 
+import com.capstone.yeolmaeTeamProject.domain.community.dto.request.PostUpdateRequestDto;
 import com.capstone.yeolmaeTeamProject.domain.user.domain.User;
 import com.capstone.yeolmaeTeamProject.global.common.domain.BaseEntity;
+import com.capstone.yeolmaeTeamProject.global.exception.PermissionDeniedException;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
 import lombok.*;
+
+import java.util.Optional;
 
 @Entity
 @Getter
@@ -42,4 +46,22 @@ public class Post extends BaseEntity {
     private User writer;
 
     private String imageUrl;
+
+    public void update(PostUpdateRequestDto requestDto) {
+        Optional.ofNullable(requestDto.getCategory()).ifPresent(this::setCategory);
+        Optional.ofNullable(requestDto.getParentCategory()).ifPresent(this::setParentCategory);
+        Optional.ofNullable(requestDto.getTitle()).ifPresent(this::setTitle);
+        Optional.ofNullable(requestDto.getContent()).ifPresent(this::setContent);
+        Optional.ofNullable(requestDto.getImageUrl()).ifPresent(this::setImageUrl);
+    }
+
+    public boolean isOwner(User user) {
+        return writer.equals(user);
+    }
+
+    public void validateAccessPermission(User user) {
+        if (!isOwner(user) && !user.isAdmin()) {
+            throw new PermissionDeniedException("게시글 수정/삭제 권한이 없습니다.");
+        }
+    }
 }
