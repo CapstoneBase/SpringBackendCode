@@ -39,4 +39,14 @@ public class PostController {
         Long id = postService.updatePost(postId, requestDto);
         return ApiResponse.success(id);
     }
+
+    @Operation(summary = "[U] 게시글 삭제", description = "ROLE_USER 이상의 권한이 필요함")
+    @DeleteMapping("/{postId}")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    public ApiResponse<Long> deletePost(
+            @PathVariable("postId") Long postId
+    ) {
+        Long id = postService.deletePost(postId);
+        return ApiResponse.success(id);
+    }
 }
