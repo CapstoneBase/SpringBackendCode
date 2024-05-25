@@ -54,11 +54,9 @@ public class PostController {
         return ApiResponse.success(id);
     }
 
-    @Operation(summary = "[U] 카테고리별 게시글 조회", description = "ROLE_USER 이상의 권한이 필요함<br>" +
-            "parentCategory + category로 필터링 기능<br>" +
-            "두 파라미터를 모두 null로 입력 받으면 전체 게시글 조회될 수 있게끔")
+    @Operation(summary = "카테고리별 게시글 조회", description = "parentCategory와 category를 조합하여 필터링 가능<br>" +
+            "두 파라미터를 모두 null로 받으면 전체 게시글 조회할 수 있게")
     @GetMapping("")
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public ApiResponse<PagedResponseDto<PostResponseDto>> getPostsByCategory(
             @RequestParam(name = "parentCategory", required = false) String parentCategory,
             @RequestParam(name = "category", required = false) String category,
