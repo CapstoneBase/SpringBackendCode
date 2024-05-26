@@ -8,11 +8,11 @@ import lombok.Setter;
 @Setter
 public class PostUpdateRequestDto {
 
-    @Schema(description = "카테고리", example = "공지사항")
-    private String category;
-
     @Schema(description = "부모 카테고리", example = "공지사항")
     private String parentCategory;
+
+    @Schema(description = "카테고리", example = "공지사항")
+    private String category;
 
     @Schema(description = "제목", example = "제목")
     private String title;

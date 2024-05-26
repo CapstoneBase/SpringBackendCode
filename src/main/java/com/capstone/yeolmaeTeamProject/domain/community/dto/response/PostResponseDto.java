@@ -14,9 +14,9 @@ public class PostResponseDto {
 
     private String writerName;
 
-    private String category;
-
     private String parentCategory;
+
+    private String category;
 
     private String title;
 
@@ -27,9 +27,9 @@ public class PostResponseDto {
     public static PostResponseDto toDto(Post post) {
         return PostResponseDto.builder()
                 .id(post.getId())
-                .writerName(post.getWriter().getName())
-                .category(post.getCategory())
+                .writerName(post.getWriterName())
                 .parentCategory(post.getParentCategory())
+                .category(post.getCategory())
                 .title(post.getTitle())
                 .imageUrl(post.getImageUrl())
                 .createdAt(post.getCreatedAt())

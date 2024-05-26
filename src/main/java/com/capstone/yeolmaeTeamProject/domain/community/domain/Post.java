@@ -28,6 +28,10 @@ public class Post extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String writerId;
+
+    private String writerName;
+
     @Column(nullable = false)
     private String category;
 
@@ -41,10 +45,6 @@ public class Post extends BaseEntity {
     @Size(min = 1, max = 10000, message = "내용은 1자 이상 1000자 이하로 입력해주세요.")
     private String content;
 
-    @ManyToOne
-    @JoinColumn(name = "writer_id", nullable = false)
-    private User writer;
-
     private String imageUrl;
 
     public void update(PostUpdateRequestDto requestDto) {
@@ -56,7 +56,7 @@ public class Post extends BaseEntity {
     }
 
     public boolean isOwner(User user) {
-        return writer.equals(user);
+        return writerId.equals(user.getId());
     }
 
     public void validateAccessPermission(User user) {
