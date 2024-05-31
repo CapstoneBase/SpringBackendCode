@@ -4,6 +4,7 @@ import com.capstone.yeolmaeTeamProject.domain.community.dao.PostRepository;
 import com.capstone.yeolmaeTeamProject.domain.community.domain.Post;
 import com.capstone.yeolmaeTeamProject.domain.community.dto.request.PostRequestDto;
 import com.capstone.yeolmaeTeamProject.domain.community.dto.request.PostUpdateRequestDto;
+import com.capstone.yeolmaeTeamProject.domain.community.dto.response.PostDetailsResponseDto;
 import com.capstone.yeolmaeTeamProject.domain.community.dto.response.PostResponseDto;
 import com.capstone.yeolmaeTeamProject.domain.user.application.UserService;
 import com.capstone.yeolmaeTeamProject.domain.user.domain.User;
@@ -59,6 +60,11 @@ public class PostService {
     public PagedResponseDto<PostResponseDto> getPostsByCategory(String parentCategory, String category, Pageable pageable) {
         Page<Post> posts = postRepository.findAllByParentCategoryAndCategory(parentCategory, category, pageable);
         return new PagedResponseDto<>(posts.map(PostResponseDto::toDto));
+    }
+
+    public PostDetailsResponseDto getPostDetails(Long postId) {
+        Post post = getPostByIdOrThrow(postId);
+        return PostDetailsResponseDto.toDto(post);
     }
 
 }
