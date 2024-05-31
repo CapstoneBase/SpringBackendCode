@@ -54,7 +54,7 @@ public class PostController {
         return ApiResponse.success(id);
     }
 
-    @Operation(summary = "카테고리별 게시글 조회", description = "parentCategory와 category를 조합하여 필터링 가능<br>" +
+    @Operation(summary = "게시글 목록 조회", description = "parentCategory와 category를 조합하여 필터링 가능<br>" +
             "두 파라미터를 모두 null로 받으면 전체 게시글 조회할 수 있게")
     @GetMapping("")
     public ApiResponse<PagedResponseDto<PostResponseDto>> getPostsByCategory(
