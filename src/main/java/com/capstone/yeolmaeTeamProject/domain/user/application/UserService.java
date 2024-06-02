@@ -41,6 +41,11 @@ public class UserService {
         return UserResponseDto.toDto(user);
     }
 
+    public UserResponseDto getUserProfile(String userId) {
+        User user = getUserByIdOrThrow(userId);
+        return UserResponseDto.toDto(user);
+    }
+
     public String updateUser(UserUpdateRequestDto requestDto) {
         User user = getCurruentUser();
         user.update(requestDto, passwordEncoder);
@@ -62,6 +67,10 @@ public class UserService {
 
     public User getCurruentUser() {
         String userId = AuthUtil.getAuthenticationInfoUserId();
+        return getUserByIdOrThrow(userId);
+    }
+
+    private User getUserByIdOrThrow(String userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("존재하지 않는 사용자입니다."));
     }

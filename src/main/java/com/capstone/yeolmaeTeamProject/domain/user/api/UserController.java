@@ -57,6 +57,16 @@ public class UserController {
         return ApiResponse.success(myProfile);
     }
 
+    @Operation(summary = "회원 프로필 조회", description = "로그인(권한) 하지 않아도 조회 가능")
+    @GetMapping("/{userId}")
+//    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    public ApiResponse<UserResponseDto> getUserProfile(
+            @PathVariable("userId") String userId
+    ) {
+        UserResponseDto user = userService.getUserProfile(userId);
+        return ApiResponse.success(user);
+    }
+
     @Operation(summary = "회원 탈퇴", description = "ROLE_USER 권한이 필요한 상태")
     @DeleteMapping("")
     @Secured({"ROLE_USER", "ROLE_ADMIN"})   //권한 체크 기능 추가

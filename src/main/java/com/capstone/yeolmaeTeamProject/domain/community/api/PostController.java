@@ -61,7 +61,7 @@ public class PostController {
     public ApiResponse<PagedResponseDto<PostResponseDto>> getPostsByCategory(
             @RequestParam(name = "parentCategory", required = false) String parentCategory,
             @RequestParam(name = "category", required = false) String category,
-            @RequestParam(name = "page", defaultValue = "1") int page,
+            @RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "size", defaultValue = "6") int size
     ) {
         Pageable pageable = PageRequest.of(page, size);
