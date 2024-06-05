@@ -52,7 +52,7 @@ public class PostService {
         return post.getId();
     }
 
-    private Post getPostByIdOrThrow(Long postId) {
+    public Post getPostByIdOrThrow(Long postId) {
         return postRepository.findById(postId)
                 .orElseThrow(() -> new NotFoundException("해당 게시글이 존재하지 않습니다."));
     }
