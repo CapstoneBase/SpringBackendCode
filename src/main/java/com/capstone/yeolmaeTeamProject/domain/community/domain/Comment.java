@@ -3,10 +3,8 @@ package com.capstone.yeolmaeTeamProject.domain.community.domain;
 import com.capstone.yeolmaeTeamProject.domain.community.dto.request.CommentUpdateRequestDto;
 import com.capstone.yeolmaeTeamProject.domain.user.domain.User;
 import com.capstone.yeolmaeTeamProject.global.exception.PermissionDeniedException;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.Optional;
@@ -23,18 +21,30 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private Long postId;
 
     private Long parentId;
 
+    @Column(nullable = false)
     private String writerId;
 
+    @Column(nullable = false)
     private String writerName;
 
+    @Column(nullable = false)
+    @Size(min = 1, max = 1000, message = "댓글은 1자 이상 1000자 이하로 작성해야 합니다.")
     private String content;
+
+    @Column(name = "is_deleted")
+    protected Boolean isDeleted = Boolean.FALSE;
 
     public void update(CommentUpdateRequestDto requestDto) {
         Optional.ofNullable(requestDto.getContent()).ifPresent(this::setContent);
+    }
+
+    public void delete(){
+        this.isDeleted = true;
     }
 
     public boolean isOwner(User currentUser) {

@@ -39,5 +39,15 @@ public class CommentController {
         Long id = commentService.updateComment(commentId, requestDto);
         return ApiResponse.success(id);
     }
+
+    @Operation(summary = "[U] 댓글 삭제", description = "ROLE_USER 이상의 권한이 필요함")
+    @DeleteMapping("/{commentId}")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    public ApiResponse<Long> deleteComment(
+            @PathVariable("commentId") Long commentId
+    ) {
+        Long id = commentService.deleteComment(commentId);
+        return ApiResponse.success(id);
+    }
 }
 

@@ -43,6 +43,15 @@ public class CommentService {
         return comment.getId();
     }
 
+    public Long deleteComment(Long commentId) {
+        User currentUser = userService.getCurruentUser();
+        Comment comment = getCommentByIdOrThrow(commentId);
+        comment.validateAccessPermission(currentUser);
+        comment.delete();
+        validationService.checkValid(comment);
+        return commentRepository.save(comment).getId();
+    }
+
     private void validateCommentForCreation(CommentRequestDto requestDto) {
         postService.getPostByIdOrThrow(requestDto.getPostId());
         if (requestDto.getParentId() != null) {
