@@ -3,6 +3,7 @@ package com.capstone.yeolmaeTeamProject.domain.community.application;
 import com.capstone.yeolmaeTeamProject.domain.community.dao.CommentRepository;
 import com.capstone.yeolmaeTeamProject.domain.community.domain.Comment;
 import com.capstone.yeolmaeTeamProject.domain.community.dto.request.CommentRequestDto;
+import com.capstone.yeolmaeTeamProject.domain.community.dto.request.CommentUpdateRequestDto;
 import com.capstone.yeolmaeTeamProject.domain.user.application.UserService;
 import com.capstone.yeolmaeTeamProject.domain.user.domain.User;
 import com.capstone.yeolmaeTeamProject.global.exception.NotFoundException;
@@ -32,6 +33,16 @@ public class CommentService {
         return commentRepository.save(comment).getId();
     }
 
+    public Long updateComment(Long commentId, CommentUpdateRequestDto requestDto) {
+        User currentUser = userService.getCurruentUser();
+        Comment comment = getCommentByIdOrThrow(commentId);
+        comment.validateAccessPermission(currentUser);
+        comment.update(requestDto);
+        validationService.checkValid(comment);
+        commentRepository.save(comment);
+        return comment.getId();
+    }
+
     private void validateCommentForCreation(CommentRequestDto requestDto) {
         postService.getPostByIdOrThrow(requestDto.getPostId());
         if (requestDto.getParentId() != null) {
@@ -41,5 +52,10 @@ public class CommentService {
                 throw new IllegalArgumentException("부모 댓글의 postId와 요청의 postId가 일치하지 않습니다.");
             }
         }
+    }
+
+    private Comment getCommentByIdOrThrow(Long commentId) {
+        return commentRepository.findById(commentId)
+                .orElseThrow(() -> new NotFoundException("댓글을 찾을 수 없습니다."));
     }
 }
