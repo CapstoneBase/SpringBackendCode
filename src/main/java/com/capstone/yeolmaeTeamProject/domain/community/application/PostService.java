@@ -75,11 +75,13 @@ public class PostService {
                 .orElseThrow(() -> new NotFoundException("해당 게시글이 존재하지 않습니다."));
     }
 
+    @Transactional(readOnly = true)
     public PagedResponseDto<PostResponseDto> getPostsByCategory(String parentCategory, String category, Pageable pageable) {
         Page<Post> posts = postRepository.findAllByParentCategoryAndCategory(parentCategory, category, pageable);
         return new PagedResponseDto<>(posts.map(PostResponseDto::toDto));
     }
 
+    @Transactional(readOnly = true)
     public PostDetailsResponseDto getPostDetails(Long postId, boolean includeDeleted) {
         Post post = getPostByIdOrThrow(postId);
         List<CommentResponseDto> comments = getCommentsByPostId(postId, includeDeleted);

@@ -33,10 +33,12 @@ public class UserService {
         return userRepository.save(user).getId();
     }
 
+    @Transactional(readOnly = true)
     public Boolean checkId(UserIdRequestDto requestDto) {
         return userRepository.existsById(requestDto.getId());
     }
 
+    @Transactional(readOnly = true)
     public UserResponseDto getMyProfile() {
         User user = getCurruentUser();
         return UserResponseDto.toDto(user);
