@@ -75,4 +75,12 @@ public class FileHandler {
             throw new FileUploadFailException("파일 저장 실패", e);
         }
     }
+
+    public void deleteFile(String savedPath) {
+        File fileToDelete = new File(savedPath);
+        boolean deleted = fileToDelete.delete();
+        if (!deleted) {
+            log.info("[{}] 파일을 삭제하는데 실패했습니다.", savedPath);
+        }
+    }
 }
