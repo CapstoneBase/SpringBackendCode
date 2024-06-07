@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Builder
@@ -24,9 +25,11 @@ public class PostDetailsResponseDto {
 
     private String imageUrl;
 
+    private List<CommentResponseDto> comments;
+
     private LocalDateTime createdAt;
 
-    public static PostDetailsResponseDto toDto(Post post) {
+    public static PostDetailsResponseDto toDto(Post post, List<CommentResponseDto> comments) {
         return PostDetailsResponseDto.builder()
                 .id(post.getId())
                 .writerName(post.getWriterName())
@@ -35,6 +38,7 @@ public class PostDetailsResponseDto {
                 .title(post.getTitle())
                 .content(post.getContent())
                 .imageUrl(post.getImageUrl())
+                .comments(comments)
                 .createdAt(post.getCreatedAt())
                 .build();
     }

@@ -2,6 +2,7 @@ package com.capstone.yeolmaeTeamProject.domain.community.domain;
 
 import com.capstone.yeolmaeTeamProject.domain.community.dto.request.CommentUpdateRequestDto;
 import com.capstone.yeolmaeTeamProject.domain.user.domain.User;
+import com.capstone.yeolmaeTeamProject.global.common.domain.BaseEntity;
 import com.capstone.yeolmaeTeamProject.global.exception.PermissionDeniedException;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
@@ -15,7 +16,7 @@ import java.util.Optional;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Comment {
+public class Comment extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

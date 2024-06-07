@@ -69,12 +69,13 @@ public class PostController {
         return ApiResponse.success(responseDto);
     }
 
-    @Operation(summary = "게시글 본문 조회")
+    @Operation(summary = "게시글 본문 조회", description = "includeDeleted는 삭제된 댓글을 포함할지 여부를 의미함")
     @GetMapping("/{postId}")
     public ApiResponse<PostDetailsResponseDto> getPostDetails(
-            @PathVariable("postId") Long postId
+            @PathVariable("postId") Long postId,
+            @RequestParam(name = "includeDeleted", defaultValue = "false") boolean includeDeleted
     ) {
-        PostDetailsResponseDto responseDto = postService.getPostDetails(postId);
+        PostDetailsResponseDto responseDto = postService.getPostDetails(postId, includeDeleted);
         return ApiResponse.success(responseDto);
     }
 }
