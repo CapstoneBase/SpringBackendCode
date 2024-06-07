@@ -13,6 +13,7 @@ import com.capstone.yeolmaeTeamProject.global.validation.ValidationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -46,6 +47,7 @@ public class UserService {
         return UserResponseDto.toDto(user);
     }
 
+    @Transactional
     public String updateUser(UserUpdateRequestDto requestDto) {
         User user = getCurruentUser();
         user.update(requestDto, passwordEncoder);
@@ -53,6 +55,7 @@ public class UserService {
         return userRepository.save(user).getId();
     }
 
+    @Transactional
     public String deleteUser() {
         User user = getCurruentUser();
         userRepository.delete(user);

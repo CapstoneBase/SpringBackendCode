@@ -12,6 +12,7 @@ import com.capstone.yeolmaeTeamProject.global.validation.ValidationService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +34,7 @@ public class CommentService {
         return commentRepository.save(comment).getId();
     }
 
+    @Transactional
     public Long updateComment(Long commentId, CommentUpdateRequestDto requestDto) {
         User currentUser = userService.getCurruentUser();
         Comment comment = getCommentByIdOrThrow(commentId);
@@ -43,6 +45,7 @@ public class CommentService {
         return comment.getId();
     }
 
+    @Transactional
     public Long deleteComment(Long commentId) {
         User currentUser = userService.getCurruentUser();
         Comment comment = getCommentByIdOrThrow(commentId);

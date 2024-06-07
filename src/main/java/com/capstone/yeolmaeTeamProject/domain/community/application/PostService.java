@@ -24,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,6 +50,7 @@ public class PostService {
         return postRepository.save(post).getId();
     }
 
+    @Transactional
     public Long updatePost(Long postId, PostUpdateRequestDto requestDto) {
         User curruentUser = userService.getCurruentUser();
         Post post = getPostByIdOrThrow(postId);
@@ -59,6 +61,7 @@ public class PostService {
         return post.getId();
     }
 
+    @Transactional
     public Long deletePost(Long postId) {
         User curruentUser = userService.getCurruentUser();
         Post post = getPostByIdOrThrow(postId);
