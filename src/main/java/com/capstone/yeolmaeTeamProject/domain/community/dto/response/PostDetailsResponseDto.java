@@ -1,6 +1,7 @@
 package com.capstone.yeolmaeTeamProject.domain.community.dto.response;
 
 import com.capstone.yeolmaeTeamProject.domain.community.domain.Post;
+import com.capstone.yeolmaeTeamProject.global.common.file.dto.response.UploadedFileResponseDto;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -25,6 +26,8 @@ public class PostDetailsResponseDto {
 
     private String imageUrl;
 
+    private List<UploadedFileResponseDto> files;
+
     private List<CommentResponseDto> comments;
 
     private LocalDateTime createdAt;
@@ -38,6 +41,7 @@ public class PostDetailsResponseDto {
                 .title(post.getTitle())
                 .content(post.getContent())
                 .imageUrl(post.getImageUrl())
+                .files(UploadedFileResponseDto.toDto(post.getUploadedFiles()))
                 .comments(comments)
                 .createdAt(post.getCreatedAt())
                 .build();

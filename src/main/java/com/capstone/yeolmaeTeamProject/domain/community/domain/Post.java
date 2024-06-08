@@ -3,6 +3,7 @@ package com.capstone.yeolmaeTeamProject.domain.community.domain;
 import com.capstone.yeolmaeTeamProject.domain.community.dto.request.PostUpdateRequestDto;
 import com.capstone.yeolmaeTeamProject.domain.user.domain.User;
 import com.capstone.yeolmaeTeamProject.global.common.domain.BaseEntity;
+import com.capstone.yeolmaeTeamProject.global.common.file.domain.UploadedFile;
 import com.capstone.yeolmaeTeamProject.global.exception.PermissionDeniedException;
 
 import jakarta.persistence.*;
@@ -10,6 +11,7 @@ import jakarta.validation.constraints.Size;
 
 import lombok.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Entity
@@ -47,12 +49,17 @@ public class Post extends BaseEntity {
 
     private String imageUrl;
 
-    public void update(PostUpdateRequestDto requestDto) {
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_files")
+    private List<UploadedFile> uploadedFiles;
+
+    public void update(PostUpdateRequestDto requestDto, List<UploadedFile> uploadedFiles) {
         Optional.ofNullable(requestDto.getCategory()).ifPresent(this::setCategory);
         Optional.ofNullable(requestDto.getParentCategory()).ifPresent(this::setParentCategory);
         Optional.ofNullable(requestDto.getTitle()).ifPresent(this::setTitle);
         Optional.ofNullable(requestDto.getContent()).ifPresent(this::setContent);
         Optional.ofNullable(requestDto.getImageUrl()).ifPresent(this::setImageUrl);
+        Optional.ofNullable(uploadedFiles).ifPresent(this::setUploadedFiles);
     }
 
     public boolean isOwner(User user) {

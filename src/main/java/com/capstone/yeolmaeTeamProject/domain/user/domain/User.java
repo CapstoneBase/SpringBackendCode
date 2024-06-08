@@ -110,4 +110,8 @@ public class User extends BaseEntity implements UserDetails {
     public boolean isAdmin() {
         return role.equals(Role.ADMIN);
     }
+
+    public boolean isSameUser(User user) {
+        return this.id.equals(user.getId());
+    }
 }

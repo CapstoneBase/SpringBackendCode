@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class PostUpdateRequestDto {
@@ -22,4 +24,7 @@ public class PostUpdateRequestDto {
 
     @Schema(description = "이미지 URL", example = "https://image.com")
     private String imageUrl;
+
+    @Schema(description = "첨부파일 경로 리스트", example = "[\"/resources/files/boards/339609571877700_4305d83e-090a-480b-a470-b5e96164d113.png\", \"/resources/files/boards/4305d83e-090a-480b-a470-b5e96164d114.png\"]")
+    private List<String> fileUrlList;
 }

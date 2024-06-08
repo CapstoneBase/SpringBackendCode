@@ -16,6 +16,8 @@ import com.capstone.yeolmaeTeamProject.domain.user.application.UserService;
 import com.capstone.yeolmaeTeamProject.domain.user.domain.User;
 
 import com.capstone.yeolmaeTeamProject.global.common.dto.PagedResponseDto;
+import com.capstone.yeolmaeTeamProject.global.common.file.application.UploadedFileService;
+import com.capstone.yeolmaeTeamProject.global.common.file.domain.UploadedFile;
 import com.capstone.yeolmaeTeamProject.global.exception.NotFoundException;
 import com.capstone.yeolmaeTeamProject.global.validation.ValidationService;
 
@@ -43,9 +45,12 @@ public class PostService {
 
     private final PostRepository postRepository;
 
+    private final UploadedFileService uploadedFileService;
+
     public Long createPost(PostRequestDto requestDto) {
         User writer = userService.getCurruentUser();
-        Post post = PostRequestDto.toEntity(requestDto, writer);
+        List<UploadedFile> uploadedFiles = uploadedFileService.getUploadedFilesByUrls(requestDto.getFileUrlList());
+        Post post = PostRequestDto.toEntity(requestDto, writer, uploadedFiles);
         validationService.checkValid(post);
         return postRepository.save(post).getId();
     }
@@ -54,8 +59,9 @@ public class PostService {
     public Long updatePost(Long postId, PostUpdateRequestDto requestDto) {
         User curruentUser = userService.getCurruentUser();
         Post post = getPostByIdOrThrow(postId);
+        List<UploadedFile> uploadedFiles = uploadedFileService.getUploadedFilesByUrls(requestDto.getFileUrlList());
         post.validateAccessPermission(curruentUser);
-        post.update(requestDto);
+        post.update(requestDto, uploadedFiles);
         validationService.checkValid(post);
         postRepository.save(post);
         return post.getId();
