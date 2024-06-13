@@ -1,4 +1,5 @@
 ﻿## Yeolmae 프로젝트 백엔드 코드
+[최근 merge 오류로 branch - dev의 커밋을 main으로 옮겨오지 못하였습니다]
 [개발 진행 branch - dev]
 
 ## 기능별 개발 순서도
